@@ -18,7 +18,7 @@ jobs:
             let reviewed = false;
 
             if (Array.isArray(reviews.data)) {
-              reviewed = reviews.data.some((c) => (c.user.login === "matejker" && c.state === "COMMENT"));
+              reviewed = reviews.data.some((c) => (c.user.login === "matejker" && c.state === "COMMENTED"));
             }
 
             if (reviewed) {
