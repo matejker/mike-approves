@@ -8,7 +8,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const reviews = github.pulls.listReviews({
+            const reviews = await github.pulls.listReviews({
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: ${{ github.event.pull_request.number }}
@@ -22,7 +22,7 @@ jobs:
             }
 
             if (reviewed) {
-              github.pulls.createReview({
+              await github.pulls.createReview({
                 pull_number: ${{ github.event.pull_request.number }},
                 owner: context.repo.owner,
                 repo: context.repo.repo,
