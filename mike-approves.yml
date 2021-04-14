@@ -1,5 +1,5 @@
 name: Mike approves
-on: pull_request_target
+on: pull_request
 jobs:
   mike-approves:
     runs-on: ubuntu-latest
