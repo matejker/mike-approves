@@ -1,9 +1,10 @@
 # Mike approves
-> When Mike approves your PR it a special moment
+> Whenever Mike approves your PR it a special moment
 
 ![](mike-approves.gif)
 
-
+## Usage
+Add `mike-approves.yml` into `.github/workflows` and make your PR special.
 ```yaml
 name: Mike approves
 on: pull_request_review
