@@ -19,6 +19,6 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               event: 'COMMENT',
-              body: '![]()'
+              body: '![](https://raw.githubusercontent.com/matejker/mike-approves/master/mike-approves.gif)'
             })
           }
