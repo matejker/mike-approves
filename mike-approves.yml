@@ -1,5 +1,5 @@
 name: Mike approves
-on: pull_request_review_comment
+on: pull_request
 jobs:
   mike-approves:
     runs-on: ubuntu-latest
@@ -8,11 +8,12 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const reviews = github.pulls.listReviews({
+            const reviews = await github.pulls.listReviews({
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: ${{ github.event.pull_request.number }}
             });
+            console.log(reviews)
 
             const reviewed = false;
 
@@ -21,7 +22,7 @@ jobs:
             }
 
             if (reviewed) {
-              github.pulls.createReview({
+              await github.pulls.createReview({
                 pull_number: ${{ github.event.pull_request.number }},
                 owner: context.repo.owner,
                 repo: context.repo.repo,
