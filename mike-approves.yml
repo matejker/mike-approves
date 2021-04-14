@@ -1,5 +1,5 @@
 name: Mike approves
-on: pull_request_target
+on: pull_request_review_comment
 jobs:
   mike-approves:
     runs-on: ubuntu-latest
@@ -17,7 +17,7 @@ jobs:
             const reviewed = false;
 
             if (Array.isArray(reviews)) {
-                reviewed = reviews.some((c) => (c.user.login === "jamie--stewart" && c.state === "APPROVED"));
+                reviewed = reviews.some((c) => (c.user.login === "matejker" && c.state === "COMMENT"));
             }
 
             if (reviewed) {
