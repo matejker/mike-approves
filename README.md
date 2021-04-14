@@ -1,5 +1,5 @@
 # Mike approves
-> Whenever Mike approves your PR it a special moment
+> Whenever Mike approves your PR it is a special moment
 
 ![](mike-approves.gif)
 
