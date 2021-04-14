@@ -8,11 +8,17 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const reviewed = github.pulls.listReviews({
+            const reviews = github.pulls.listReviews({
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: ${{ github.event.pull_request.number }}
-            }).some((c) => (c.user.login === "jamie--stewart" && c.state === "APPROVED"))
+            });
+
+            const reviewed = false;
+
+            if (Array.isArray(reviews)) {
+                reviewed = reviews.some((c) => (c.user.login === "jamie--stewart" && c.state === "APPROVED"));
+            }
 
             if (reviewed) {
               github.pulls.createReview({
