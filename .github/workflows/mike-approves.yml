@@ -13,7 +13,7 @@ jobs:
               repo: context.repo.repo,
               pull_number: ${{ github.event.pull_request.number }}
             });
-            console.log(reviews)
+            console.log(reviews.data)
 
             const reviewed = false;
 
