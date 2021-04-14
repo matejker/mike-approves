@@ -13,12 +13,12 @@ jobs:
               repo: context.repo.repo,
               pull_number: ${{ github.event.pull_request.number }}
             });
-            console.log(reviews)
+            console.log(reviews.data)
 
-            const reviewed = false;
+            let reviewed = false;
 
-            if (Array.isArray(reviews)) {
-                reviewed = reviews.some((c) => (c.user.login === "matejker" && c.state === "COMMENT"));
+            if (Array.isArray(reviews.data)) {
+              reviewed = reviews.data.some((c) => (c.user.login === "matejker" && c.state === "COMMENTED"));
             }
 
             if (reviewed) {
