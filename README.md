@@ -6,7 +6,7 @@
 
 ```yaml
 name: Mike approves
-on: pull_request_target
+on: pull_request_review_comment
 jobs:
   mike-approves:
     runs-on: ubuntu-latest
@@ -20,13 +20,13 @@ jobs:
               repo: context.repo.repo,
               pull_number: ${{ github.event.pull_request.number }}
             });
-            
-			const reviewed = false;
-			
-			if (Array.isArray(reviews)) {
-				reviewed = reviews.some((c) => (c.user.login === "jamie--stewart" && c.state === "APPROVED"))
-			}
-			
+
+            const reviewed = false;
+
+            if (Array.isArray(reviews)) {
+                reviewed = reviews.some((c) => (c.user.login === "matejker" && c.state === "COMMENT"));
+            }
+
             if (reviewed) {
               github.pulls.createReview({
                 pull_number: ${{ github.event.pull_request.number }},
@@ -36,4 +36,5 @@ jobs:
                 body: '![](https://raw.githubusercontent.com/matejker/mike-approves/master/mike-approves.gif)'
               })
             }
+
 ```
