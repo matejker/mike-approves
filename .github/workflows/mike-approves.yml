@@ -17,6 +17,10 @@ jobs:
 
             const reviewed = false;
 
+            if (Array.isArray(reviews.data)) {
+              console.log("yas")
+            }
+
             if (reviewed) {
               await github.pulls.createReview({
                 pull_number: ${{ github.event.pull_request.number }},
