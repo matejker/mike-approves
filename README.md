@@ -15,12 +15,13 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const comments = await github.pulls.listReviews({
+            const reviews = await github.pulls.listReviews({
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: ${{ github.event.pull_request.number }}
-            });
-            if (comments.some((c) => (c.user.login === "jamie--stewart" && c.state === "APPROVED"))) {
+            })
+            
+            if (reviews.some((c) => (c.user.login === "jamie--stewart" && c.state === "APPROVED"))) {
               await github.pulls.createReview({
                 pull_number: ${{ github.event.pull_request.number }},
                 owner: context.repo.owner,
