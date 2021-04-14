@@ -6,7 +6,7 @@
 
 ```yaml
 name: Mike approves
-on: pull_request
+on: pull_request_target
 jobs:
   mike-approves:
     runs-on: ubuntu-latest
@@ -15,14 +15,20 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const reviews = await github.pulls.listReviews({
+            const reviews = github.pulls.listReviews({
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: ${{ github.event.pull_request.number }}
-            })
+            });
             
-            if (reviews.some((c) => (c.user.login === "jamie--stewart" && c.state === "APPROVED"))) {
-              await github.pulls.createReview({
+			const reviewed = false;
+			
+			if (Array.isArray(reviews)) {
+				reviewed = reviews.some((c) => (c.user.login === "jamie--stewart" && c.state === "APPROVED"))
+			}
+			
+            if (reviewed) {
+              github.pulls.createReview({
                 pull_number: ${{ github.event.pull_request.number }},
                 owner: context.repo.owner,
                 repo: context.repo.repo,
@@ -30,5 +36,4 @@ jobs:
                 body: '![](https://raw.githubusercontent.com/matejker/mike-approves/master/mike-approves.gif)'
               })
             }
-
 ```
