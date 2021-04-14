@@ -4,7 +4,7 @@
 ![](mike-approves.gif)
 
 ## Usage
-Add `mike-approves.yml` into `.github/workflows` and make your PR special.
+Add `mike-approves.yml` into `.github/workflows` and make your PR special. See [example](https://github.com/matejker/mike-approves/pull/11)
 ```yaml
 name: Mike approves
 on: pull_request_review
