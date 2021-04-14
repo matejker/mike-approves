@@ -4,11 +4,11 @@ jobs:
   mike-approves:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/github-script@v2
+      - uses: actions/github-script@v3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const comments = github.pulls.listReviews({
+            const comments = await github.pulls.listReviews({
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: ${{ github.event.pull_request.number }}
